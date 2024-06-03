@@ -6,7 +6,7 @@
 using namespace std;
 
 void rotNeighbours(pair<size_t, size_t> coords, vector<pair<size_t, size_t>>& rotten, vector<vector<size_t>>& field, size_t& counter, size_t K, size_t L) {
-    size_t x = coords.first, y = coords.second;
+    long long int x = coords.first, y = coords.second;
 
     if (x + 1 < K) {
         if (field[x + 1][y] == 0) {
@@ -42,14 +42,14 @@ void rotNeighbours(pair<size_t, size_t> coords, vector<pair<size_t, size_t>>& ro
     }
 }
 
-size_t countRotten(vector<vector<size_t>>& field, size_t K, size_t L, size_t R, vector<pair<size_t, size_t>>& rotten) {
+size_t countRotten(vector<vector<size_t>>& field, size_t K, size_t L, size_t days, vector<pair<size_t, size_t>>& rotten) {
     size_t counter = rotten.size();
     size_t index = 0;
 
     for (size_t i = 0; i < rotten.size(); i++) {
         field[rotten[i].first][rotten[i].second]++;
     }
-    for (size_t d = 0; d < R; d++) {
+    for (size_t d = 0; d < days; d++) {
         size_t size = rotten.size();
         for (; index < size; index++) {
             rotNeighbours(rotten[index], rotten, field, counter, K, L);
@@ -58,8 +58,8 @@ size_t countRotten(vector<vector<size_t>>& field, size_t K, size_t L, size_t R, 
     return counter;
 }
 
-
 int main() {
+
     size_t K, L, R, x, y;
     cin >> K >> L >> R;
 
